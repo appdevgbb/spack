@@ -52,6 +52,11 @@ class NetcdfC(CMakePackage, AutotoolsPackage):
     version("4.4.0", sha256="09b78b152d3fd373bee4b5738dc05c7b2f5315fe34aa2d94ee9256661119112f")
     version("4.3.3.1", sha256="f2ee78eb310637c007f001e7c18e2d773d23f3455242bde89647137b7344c2e2")
     version("4.3.3", sha256="3f16e21bc3dfeb3973252b9addf5defb48994f84fc9c9356081f871526a680e7")
+    # GBB - It looks like ADCIRC 55.01 uses this version of netcdf-c
+    # see the depends_on code below
+    version("4.2.1.1", 
+            sha256="19e9600a387a56e9c03e2da7e4fa9613a6d50342f9dc3ae53c39b44a86ef9149", 
+            url="https://asgs-static-assets.sfo2.digitaloceanspaces.com/lib/netcdf-4.2.1.1.tar.gz")
 
     with when("build_system=cmake"):
         # TODO: document why we need to revert https://github.com/Unidata/netcdf-c/pull/1731
@@ -254,6 +259,11 @@ class NetcdfC(CMakePackage, AutotoolsPackage):
     depends_on("szip", when="+szip")
     depends_on("c-blosc", when="+blosc")
     depends_on("zstd", when="+zstd")
+
+    # GBB - netcdf-c 4.2.1.1
+    depends_on("autoconf", type="build", when="@4.2.1.1 build_system=autotools")
+    depends_on("automake", type="build", when="@4.2.1.1 build_system=autotools")
+    depends_on("libtool", type="build", when="@4.2.1.1 build_system=autotools")
 
     # Byte-range I/O was added in version 4.7.0:
     conflicts("+byterange", when="@:4.6")
