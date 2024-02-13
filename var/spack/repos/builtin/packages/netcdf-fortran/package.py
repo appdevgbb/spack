@@ -31,6 +31,10 @@ class NetcdfFortran(AutotoolsPackage):
     version("4.4.5", sha256="2467536ce29daea348c736476aa8e684c075d2f6cab12f3361885cb6905717b8")
     version("4.4.4", sha256="b2d395175f8d283e68c8be516e231a96b191ade67ad0caafaf7fa01b1e6b5d75")
     version("4.4.3", sha256="330373aa163d5931e475b5e83da5c1ad041e855185f24e6a8b85d73b48d6cda9")
+    # GBB - ADCIRC 55.01 needs version 4.2 of netcdf-fortran to compile
+    version("4.2",   
+            sha256="069e1a0fb50972f28309210987a51563369a6ddb4ac768ef76e599354d384ae9",
+            url="https://asgs-static-assets.sfo2.digitaloceanspaces.com/lib/netcdf-fortran-4.2.tar.gz")
 
     variant("pic", default=True, description="Produce position-independent code (for shared libs)")
     variant("shared", default=True, description="Enable shared library")
